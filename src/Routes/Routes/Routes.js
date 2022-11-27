@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
-import CategoryCard from "../../Pages/Home/Category/CategoryCard";
 import CategoryDetails from "../../Pages/Home/Category/CategoryDetails";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Home/Login/Login";
 import Error from "../../Pages/Shared/Error/Error";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
 {
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         },
         {
             path: '/category/:id',
-            element:<CategoryDetails></CategoryDetails>
+            element:<PrivateRoute><CategoryDetails></CategoryDetails></PrivateRoute>
         },
     ]
 }
