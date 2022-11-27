@@ -9,6 +9,10 @@ const router = createBrowserRouter([
 {
     path:'/',
     errorElement:<Error></Error>,
+    loader: async ()=>{
+
+        return  fetch('http://localhost:5000/bikes')
+      },
     element: <Main></Main>,
     children:[
         {
