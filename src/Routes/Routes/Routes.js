@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
+import CategoryCard from "../../Pages/Home/Category/CategoryCard";
+import CategoryDetails from "../../Pages/Home/Category/CategoryDetails";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Home/Login/Login";
 import Error from "../../Pages/Shared/Error/Error";
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
         {
             path: '/signup',
             element:<SignUp></SignUp>
+        },
+        {
+            path: '/category/:id',
+            element:<CategoryDetails></CategoryDetails>
         },
     ]
 }
