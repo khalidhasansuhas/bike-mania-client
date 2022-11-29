@@ -1,6 +1,18 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyOrders = () => {
+    const {user} = useContext(AuthContext)
+    const url = `http://localhost:5000/bookings?email=${user.email}`;
+    const {data: bookings = []} = useQuery({
+        queryKey:['bookings', user?.email],
+        queryFn: async()=>{
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        }
+    })
     return (
         <div>
             <h3 className='text-center text-3xl font-bold my-3'>My Orders</h3>
@@ -11,32 +23,23 @@ const MyOrders = () => {
                         <tr>
                             <th></th>
                             <th>Image</th>
-                            <th>Title</th>
+                            <th>Bike Name</th>
                             <th>Price</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
+                       {
+                        bookings.map((booking, i)=> <tr key={i}>
+                            <th>{i+1}</th>
+                            <td>{booking?.image}</td>
+                            <td>{booking?.bike}</td>
+                            <td>{booking?.price}</td>
+                            <td><button className='btn btn-sm btn-primary'>Pay Now</button></td>
+                        </tr>)
+                       }
+                       
                     </tbody>
                 </table>
             </div>
