@@ -60,7 +60,7 @@ const SignUp = () => {
                 console.log(user);
                 const role = 'buyer'
                 saveUser(user.displayName,user.email, role)
-                navigate('/');
+                
             })
             .catch(error => console.error(error))
     }
@@ -76,9 +76,11 @@ const SignUp = () => {
         })
         .then(res => res.json())
         .then(data =>{
-            console.log(data)
+            navigate('/');
         })
     }
+
+    
 
     if(loading){
         <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
