@@ -6,11 +6,13 @@ import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import Allsellers from "../../Pages/Dashboard/Allsellers/Allsellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import CategoryDetails from "../../Pages/Home/Category/CategoryDetails";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Home/Login/Login";
 import Error from "../../Pages/Shared/Error/Error";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -59,15 +61,19 @@ const router = createBrowserRouter([
         },
         {
             path: '/dashboard/allusers',
-            element:<AllUsers></AllUsers>
+            element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
         },
         {
             path: '/dashboard/allbuyers',
-            element:<AllBuyers></AllBuyers>
+            element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
         },
         {
             path: '/dashboard/allsellrs',
-            element:<Allsellers></Allsellers>
+            element:<AdminRoute><Allsellers></Allsellers></AdminRoute>
+        },
+        {
+            path: '/dashboard/reporteditems',
+            element:<AdminRoute><ReportedItems></ReportedItems></AdminRoute>
         },
     ]
 }
