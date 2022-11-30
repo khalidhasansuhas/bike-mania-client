@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthProvider';
+import useAdmin from '../hooks/useAdmin';
 import NavBar from '../Pages/Shared/NavBar/NavBar';
 
 const DashboardLayout = () => {
+    const { user } = useContext(AuthContext)
+    const [isAdmin] = useAdmin(user.email)
     return (
         <div>
             <NavBar></NavBar>
@@ -10,7 +14,7 @@ const DashboardLayout = () => {
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content bg-gray-800">
                     <Outlet></Outlet>
-                    
+
 
                 </div>
                 <div className="drawer-side">
@@ -20,11 +24,15 @@ const DashboardLayout = () => {
                         <li><Link to='/dashboard'>My Orders</Link ></li>
                         <li><Link to='/dashboard/addaproduct'>Add A Product</Link ></li>
                         <li><Link to='/dashboard/myproducts'>My Products</Link ></li>
-                        <li><Link to='/dashboard/allsellrs'>All Sellers</Link ></li>
-                        <li><Link to='/dashboard/allbuyers'>All Buyers</Link ></li>
-                        <li><Link to='/dashboard/allusers'>All Users</Link ></li>
-                        <li><Link to='/dashboard/reporteditems'>Reported Items</Link ></li>
-                     
+                        {
+                            isAdmin && <>
+                                <li><Link to='/dashboard/allsellrs'>All Sellers</Link ></li>
+                                <li><Link to='/dashboard/allbuyers'>All Buyers</Link ></li>
+                                <li><Link to='/dashboard/allusers'>All Users</Link ></li>
+                                <li><Link to='/dashboard/reporteditems'>Reported Items</Link ></li>
+                            </>
+                        }
+
                     </ul>
 
                 </div>
