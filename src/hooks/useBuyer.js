@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useSeller = email =>{
+const useBuyer = email =>{
     const [isBuyer, setIsBuyer]= useState(false)
     const [ isBuyerLoding, setIsBuyerLoading] = useState(true)
     useEffect(()=>{
@@ -14,4 +14,4 @@ const useSeller = email =>{
     return [isBuyer, isBuyerLoding]
 }
 
-export default useSeller;
+export default useBuyer;

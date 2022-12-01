@@ -6,6 +6,7 @@ import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import Allsellers from "../../Pages/Dashboard/Allsellers/Allsellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProduct from "../../Pages/Dashboard/MyProduct/MyProduct";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
@@ -15,6 +16,7 @@ import Login from "../../Pages/Home/Login/Login";
 import Error from "../../Pages/Shared/Error/Error";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
@@ -58,9 +60,14 @@ const router = createBrowserRouter([
     path:'/dashboard',
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children:[
+        
         {
             path: '/dashboard',
-            element:<MyOrders></MyOrders>
+            element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+        },
+        {
+            path: '/dashboard/myorders',
+            element:<BuyerRoute><MyOrders></MyOrders></BuyerRoute>
         },
         {
             path: '/dashboard/addaproduct',

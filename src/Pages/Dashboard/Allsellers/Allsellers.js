@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const Allsellers = () => {
-
+    const [refresh, setRefresh] = useState(false)
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users', 'seller'],
@@ -27,6 +27,24 @@ const Allsellers = () => {
         })
     }
 
+    const handleDelete = id =>{
+        const proceed = window.confirm('Are You sure you want to delete?')
+        if(proceed){
+            fetch(`http://localhost:5000/users/${id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    
+                    if (data.deletedCount) {
+                        toast.success('seller Deleted Succesfully')
+                        setRefresh(!refresh)
+                        refetch()
+                    }
+                })
+                .catch(e => console.log(e))
+        }
+    }
     return (
         <div className='mx-5'>
             <h3 className='text-center text-3xl font-bold my-3'>All Sellers</h3>
@@ -54,7 +72,7 @@ const Allsellers = () => {
                                 <button onClick={()=>handleVerify(user._id)} className='btn btn-xs btn-success'>Verify</button>
                                 : <p>Verified</p>
                             }</td>
-                                <td><button className='btn btn-xs btn-primary'>Delete</button></td>
+                                <td><button onClick={()=> handleDelete(user._id)} className='btn btn-xs btn-primary'>Delete</button></td>
                             </tr>)
                         }
 
