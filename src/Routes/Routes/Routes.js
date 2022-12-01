@@ -9,6 +9,7 @@ import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProduct from "../../Pages/Dashboard/MyProduct/MyProduct";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import CategoryDetails from "../../Pages/Home/Category/CategoryDetails";
 import Home from "../../Pages/Home/Home/Home";
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
 },
 {
     path:'/dashboard',
+    errorElement: <Error></Error>,
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children:[
         
@@ -68,6 +70,11 @@ const router = createBrowserRouter([
         {
             path: '/dashboard/myorders',
             element:<BuyerRoute><MyOrders></MyOrders></BuyerRoute>
+        },
+        {
+            path: '/dashboard/payment/:id',
+            element:<BuyerRoute><Payment></Payment></BuyerRoute>,
+            loader: ({params})=> fetch(`http://localhost:5000/bookings/${params.id}`)
         },
         {
             path: '/dashboard/addaproduct',

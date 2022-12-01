@@ -4,6 +4,9 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyProduct = () => {
+    const i = process.env.REACT_APP_imgbb_key
+
+    console.log(i)
     const { user } = useContext(AuthContext)
     const [refresh, setRefresh] = useState(false)
     const url = `http://localhost:5000/bikes?sellerEmail=${user?.email}`;

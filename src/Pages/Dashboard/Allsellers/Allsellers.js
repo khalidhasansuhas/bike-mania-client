@@ -72,7 +72,7 @@ const Allsellers = () => {
                                 <button onClick={()=>handleVerify(user._id)} className='btn btn-xs btn-success'>Verify</button>
                                 : <p>Verified</p>
                             }</td>
-                                <td><button onClick={()=> handleDelete(user._id)} className='btn btn-xs btn-primary'>Delete</button></td>
+                                <td><button onClick={()=> handleDelete(user._id)} className='btn btn-xs btn-error'>Delete</button></td>
                             </tr>)
                         }
 
